@@ -25,33 +25,6 @@ var popupOffsets = {
 });
 
 
-// let restaurants = [
-//     {name: 'B Star',
-//         address: '127 Clement Street',
-//         city: 'San Francisco',
-//         state: 'CA',
-//         zipcode: 94118,
-//         coordinate: [-122.46066, 37.78287]},
-//     {name: 'Zero Zero',
-//         address: '826 Folsom Street',
-//         city: 'San Francisco',
-//         state: 'CA',
-//         zipcode: 94107,
-//         coordinate: [-122.40205,37.78164]},
-//     {name: 'Ragazza',
-//         address: '311 Divisadero Street',
-//         city: 'San Francisco',
-//         state: 'CA',
-//         zipcode: 94117,
-//         coordinate: [-122.43744, 37.7724]},
-//     {name: 'The Taco Shop at Underdogs',
-//         address: '1824 Irving Street',
-//         city: 'San Francisco',
-//         state: 'CA',
-//         zipcode: 94122,
-//         coordinate: [-122.47765, 37.76379]},
-//     ];
-
 let map = tt.map({
     key: 'tz1ptALiZKB6nDN1PZBfjxiGi39e1i8z',
     container: 'map',
@@ -61,7 +34,6 @@ let map = tt.map({
 });
 map.addControl(new tt.FullscreenControl());
 map.addControl(new tt.NavigationControl());
-
 
 
 $('#search').on('submit', (evt) => {
@@ -74,7 +46,7 @@ $('#search').on('submit', (evt) => {
   $.get('/map', formInputs, (res) => {
     console.log(res);
 
-    // use res.lat and res.lon to update center on map
+    // Use res.lat and res.lon to update center on map.
     map.setCenter(
         {lat: res.lat, lng: res.lon}
         );

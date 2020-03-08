@@ -26,6 +26,7 @@ def index():
 
     return render_template("homepage.html")
 
+
 @app.route("/map")
 def search_location():
     """Search for your location on the map."""
@@ -45,7 +46,7 @@ def search_location():
 def get_restaurants_as_json():
     """Query database for restaurant info and send as JSON response."""
 
-    # Query database and create dictionary
+    # Query database and create dictionary.
     restaurants = Restaurant.query.options(db.joinedload('offers')).all()
     rests = {}
     for rest in restaurants:
@@ -64,9 +65,7 @@ def get_restaurants_as_json():
         if not rest.offers:
             rests[rest.name]['offer'] = " No current offers"
 
-    print(rests)
-
-    # Turn address into lat/lon using TomTom API
+    # Turn address into lat/lon using TomTom API.
     for rest in rests.values():
         rest["address"] = f"{rest['street_address']} {rest['city']}, {rest['state']} {rest['zipcode']}"
         query = rest["address"]
@@ -78,8 +77,6 @@ def get_restaurants_as_json():
         rest["coordinate"] = [lat_lon["lon"], lat_lon["lat"]]
 
     return jsonify(rests)
-
-    # Return jsonify(dictionary)
 
 
 @app.route("/restaurant", methods=["GET"])
@@ -165,7 +162,7 @@ def process_restaurant_registration():
 
     restaurant_id = new_restaurant.id
 
-    # Log in new restaurant
+    # Log in new restaurant.
     session["restaurant_id"] = restaurant_id
 
     flash(f"Successfully registered {name}.")
@@ -258,6 +255,5 @@ if __name__ == "__main__":
     app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
     connect_to_db(app)
-    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
